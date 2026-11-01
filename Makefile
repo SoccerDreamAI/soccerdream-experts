@@ -83,7 +83,15 @@ lint-length:
 
 test:
 	@echo "→ running tests"
-	@if [ -d tests ]; then python -m pytest -q tests || exit 1; else echo "  (no tests directory yet)"; fi
+	@python3 cli/sd.py validate teams/example-team.yaml
+	@python3 cli/sd.py demo > /dev/null && echo "  ✓ demo exits 0"
+	@python3 cli/sd.py demo --unresolved > /dev/null; \
+	  test $$? -eq 1 && echo "  ✓ demo --unresolved exits 1, as documented"
+	@python3 cli/sd.py team run teams/example-team.yaml > /dev/null 2>&1; \
+	  test $$? -eq 4 && echo "  ✓ hosted-only command exits 4 instead of failing obscurely"
+	@python3 cli/sd.py validate tests/fixtures/bad-team.yaml > /dev/null 2>&1; \
+	  test $$? -eq 2 && echo "  ✓ a team that averages disagreement is rejected with exit 2"
+	@if ls tests/test_*.py >/dev/null 2>&1; then python -m pytest -q tests || exit 1; fi
 	@echo "✓ tests passed"
 
 clean:

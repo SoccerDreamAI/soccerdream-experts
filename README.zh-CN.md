@@ -50,31 +50,47 @@
 
 ## 快速开始
 
-```bash
-# 安装客户端
-pip install soccerdream-experts
-
-# 认证（免费额度，无需绑卡）
-sd auth login
-
-# 用已发布的团队跑一场
-sd team run teams/example-team.yaml --event demo-001
-```
-
-或者用 Node：
+不用安装、不用注册、不用联网。只要有 Python 3.8+：
 
 ```bash
-npx soccerdream-experts team run teams/example-team.yaml --event demo-001
+git clone https://github.com/SoccerDreamAI/soccerdream-experts
+cd soccerdream-experts
+
+python3 cli/sd.py demo                       # 完整走一遍协议
+python3 cli/sd.py demo --unresolved          # 那条「不给结论」的路径
+python3 cli/sd.py validate teams/example-team.yaml
 ```
 
-预期输出：
+`demo` 是**录播**：输入固定，不调用任何模型。它演示的是协议本身——谁有权说什么，
+以及两个人意见相反时会发生什么：
 
 ```
-stage 1/4  context     ✓  2 个数据源已归一化
-stage 2/4  specialists ✓  4 份独立研判（其中 2 份互相矛盾）
-stage 3/4  challenge   ✓  1 条结论被推翻
-stage 4/4  review      ✓  结论已发布（置信度：中）
+stage 2/4  specialists  A: 区间 1.2 - 1.8，3 条引用
+                        B: 区间 2.1 - 2.6，1 条引用
+                        -> 分歧，零重叠
+stage 3/4  challenge    B 质询 A：「你的区间太窄」
+                        A 举出 3 条独立数据 -> 站住
+                        B 只有 1 条，够不到 2 条 -> 书面撤回
+stage 4/4  review       承重结论只依赖 1 个来源
+                        -> 置信度由「高」下调为「中」
+
+conclusion              区间 1.2 - 1.8，置信度 中
+                        不给出单一结果（这是设计如此）
 ```
+
+`validate` 不是演示。它会检查团队文件与它引用的每份人设，检查项与 CI 完全一致，
+只是错误提示更清楚：
+
+```
+$ python3 cli/sd.py validate teams/example-team.yaml
+  ok    teams/example-team.yaml
+```
+
+退出码 `2` 表示文件不合法。退出码 `1` 表示跑完了但**没有得出结论**——在这里这是
+合法结果，不是错误。
+
+拿真实数据跑团队需要托管服务。那是另一件事，与本仓库无关；本仓库也不会假装有关：
+`sd team run` 会返回 `4` 并明确说明。
 
 ## 一次运行是怎么走的
 

@@ -1,0 +1,37 @@
+# A team file that must be rejected. `make test` asserts exit code 2 on this.
+#
+# Every line here is plausible. That is the point: a validator that only rejects obviously
+# broken files catches nothing, because obviously broken files never get committed.
+#
+# What is wrong:
+#   1. rules.disagreement: average   — the one operation this framework exists to refuse
+#   2. rules.max_rounds: two         — not an integer
+#   3. no member has role: reviewer  — nothing can overturn the conclusion
+#   4. no member has role: challenger — no advocate for the dissent
+#   5. stages has no `context`       — members read material in a different order
+
+name: rejected-example
+version: 1
+description: >
+  Deliberately invalid. Used as a fixture so that the validator is proven to fail, not
+  merely assumed to work.
+
+stages:
+  - specialists
+  - challenge
+  - review
+
+members:
+  - ref: agents/quantitative-analyst.md
+    role: specialist
+
+  - ref: agents/market-odds-reader.md
+    role: specialist
+
+rules:
+  independence: strict
+  disagreement: average
+  max_rounds: two
+
+output:
+  format: report

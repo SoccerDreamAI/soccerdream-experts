@@ -49,31 +49,47 @@ Everything in the green rows runs unchanged against the hosted API. Nothing in t
 
 ## Quick start
 
-```bash
-# install the client
-pip install soccerdream-experts
-
-# authenticate (free tier, no card)
-sd auth login
-
-# run a published team against one event
-sd team run teams/example-team.yaml --event demo-001
-```
-
-Or with Node:
+No install, no account, no network. Python 3.8+ and nothing else:
 
 ```bash
-npx soccerdream-experts team run teams/example-team.yaml --event demo-001
+git clone https://github.com/SoccerDreamAI/soccerdream-experts
+cd soccerdream-experts
+
+python3 cli/sd.py demo                       # the protocol, start to finish
+python3 cli/sd.py demo --unresolved          # the run that ends with no conclusion
+python3 cli/sd.py validate teams/example-team.yaml
 ```
 
-Expected output:
+`demo` is a **recorded** run: fixed inputs, no model calls. It shows who is allowed to say
+what, and what happens when two of them disagree:
 
 ```
-stage 1/4  context     ✓  2 sources normalized
-stage 2/4  specialists ✓  4 independent reads (2 disagree)
-stage 3/4  challenge   ✓  1 claim overturned
-stage 4/4  review      ✓  conclusion published (confidence: medium)
+stage 2/4  specialists  A: range 1.2 - 1.8, 3 citations
+                        B: range 2.1 - 2.6, 1 citation
+                        -> disagree, zero overlap
+stage 3/4  challenge    B challenges A: "your window is too narrow"
+                        A cites 3 independent figures -> stands
+                        B cites 1, short of 2 -> withdraws, in writing
+stage 4/4  review       load-bearing claim rests on 1 source
+                        -> confidence high downgraded to medium
+
+conclusion              range 1.2 - 1.8, confidence medium
+                        no single outcome named, by design
 ```
+
+`validate` is not a demo. It checks a team file and every persona it references — the same
+contract checks CI runs, with better error messages:
+
+```
+$ python3 cli/sd.py validate teams/example-team.yaml
+  ok    teams/example-team.yaml
+```
+
+Exit code `2` means the file is invalid. Exit code `1` means the run completed and reached
+**no conclusion** — a valid outcome here, not an error.
+
+Running a team against live data needs the hosted service. That is a separate thing from this
+repository, and this repository will not pretend otherwise: `sd team run` exits `4` and says so.
 
 ## How a run works
 

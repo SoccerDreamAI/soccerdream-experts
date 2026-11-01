@@ -25,23 +25,43 @@ is in the wrong place — open an issue rather than a PR.
 
 ## Install
 
+There is nothing to install. `cli/sd.py` uses the standard library only — no `requirements.txt`,
+no build step, no virtualenv:
+
 ```bash
-pip install soccerdream-experts     # published package
-pip install -e .                    # from source
+git clone https://github.com/SoccerDreamAI/soccerdream-experts
+cd soccerdream-experts
+python3 cli/sd.py --help
+```
+
+There is no published `pip` or `npm` package. This file used to tell you to run
+`pip install soccerdream-experts`, which resolved to nothing; a quickstart that 404s costs more
+trust than a quickstart that does not exist. If a package is published later, this paragraph is
+where it will be announced.
+
+Optional, if you would rather type `sd` than `python3 cli/sd.py`:
+
+```bash
+alias sd='python3 /path/to/soccerdream-experts/cli/sd.py'
 ```
 
 ## Commands
 
 ```bash
-sd auth login                       # device flow, token stored in OS keyring
-sd auth status
-sd team validate teams/example-team.yaml
-sd team run teams/example-team.yaml --event demo-001
-sd team run teams/example-team.yaml --event demo-001 --format json
+python3 cli/sd.py demo                        # recorded run of the protocol
+python3 cli/sd.py demo --unresolved           # ... ending with no conclusion
+python3 cli/sd.py validate teams/example-team.yaml
 ```
 
-`sd team validate` runs the same checks as `make lint-schema`, with better error messages.
-Run it before opening a PR that touches `agents/` or `teams/`.
+`validate` runs the same contract checks as `make lint-schema`, with better error messages, and
+it also verifies that every `ref:` in the team file exists and carries all four sections. Run it
+before opening a PR that touches `agents/` or `teams/`.
+
+Anything that needs the hosted service is a stub here and says so:
+
+```bash
+python3 cli/sd.py team run ...     # exits 4 with an explanation, never a silent failure
+```
 
 ## Exit codes
 
