@@ -6,6 +6,19 @@
 
 ## English
 
+### 0. Ownership
+
+Copyright © 2026 SoccerDream AI. All rights reserved except as expressly granted below.
+
+The Licensed Work — every persona, the orchestration schema, the documentation, the assets
+and the marks — is the property of SoccerDream AI. Nothing in this repository transfers
+ownership. A licence to use is not a licence to claim authorship: publishing a copy while
+presenting it as your own work, or under our name, is outside every grant on this page.
+
+If you find this repository, or substantial parts of it, republished elsewhere without
+attribution, report it to the address in `TRADEMARK.md`. We hold the copyright and can act
+on it; the same file is honest about what we cannot enforce.
+
 ### 1. Source-available, not open source
 
 "Open source" has a specific meaning (OSI Definition): anyone may use, modify, and
@@ -101,6 +114,17 @@ Two business days.
 ---
 
 ## 简体中文
+
+### 0. 权属
+
+版权所有 © 2026 SoccerDream AI。除下文明确授予的权利外，保留一切权利。
+
+本许可作品——全部人设、编排 schema、文档、素材与标识——均为 SoccerDream AI 的财产。
+本仓库中的任何内容均不构成所有权转让。**使用权不是署名权**：把本仓库内容或其实质部分
+复制后署他人之名、或以本项目名义对外发布，不在本页任何授予范围之内。
+
+如发现本仓库或其实质部分被无署名转载，请按 `TRADEMARK.md` 中的地址告知。我们持有著作权，
+可以据此主张权利；同一份文件也写清了我们追究不到什么。
 
 ### 1. 源码可见，不是开源
 

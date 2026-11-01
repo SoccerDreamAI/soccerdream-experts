@@ -134,6 +134,10 @@ Dual-licensed, deliberately:
 
 Commercial use of either requires a separate license. See [NOTICE.md](NOTICE.md).
 
+**Forking?** [TRADEMARK.md](TRADEMARK.md) lists the three things a fork must do, and — in the
+same document — what we cannot enforce and will not pretend to. If you find a copy of this
+project presented as the official one, that page tells you where to report it.
+
 ## Disclaimer
 
 This project is a **research and analysis framework**. It does not provide betting advice, tips, or recommendations of any kind. Any output is an analytical artifact, not a prediction of a real-world outcome. Nothing here is intended for use by anyone under 18. You are responsible for complying with the laws of your jurisdiction.
