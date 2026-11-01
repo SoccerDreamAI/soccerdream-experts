@@ -58,14 +58,26 @@ lint-secrets:
 	if [ $$hits -eq 0 ]; then echo "  ✓ no credentials found"; else exit 1; fi
 
 ## Personas over 400 words are usually restating themselves.
+##
+## Counts the body only, i.e. everything after the closing `---` of the front
+## matter. The earlier version used `sed '1,/^---$$/d;1,/^---$$/d'`, which looks
+## right and is not: after the first deletion the remaining text contains no
+## `---`, so the second range runs to EOF and deletes the file. It reported 0
+## words for every persona and therefore never failed — a check that cannot fail
+## is worse than no check. Hence the explicit "no body" guard below.
 lint-length:
 	@echo "→ checking persona length"
 	@fail=0; \
 	for f in $(PERSONA_DIR)/*.md; do \
 	  case "$$f" in */_schema.md) continue ;; esac; \
-	  body=$$(sed '1,/^---$$/d;1,/^---$$/d' "$$f" | wc -w); \
-	  if [ "$$body" -gt 800 ]; then echo "  ✗ $$f is $$body words (hard limit 800)"; fail=1; \
-	  elif [ "$$body" -gt 400 ]; then echo "  ! $$f is $$body words (soft limit 400)"; fi; \
+	  body=$$(awk 'BEGIN{d=0} /^---[[:space:]]*$$/{d++; next} d>=2' "$$f" | wc -w); \
+	  if [ "$$body" -eq 0 ]; then \
+	    echo "  ✗ $$f: no body found after front matter (parser broken?)"; fail=1; \
+	  elif [ "$$body" -gt 800 ]; then \
+	    echo "  ✗ $$f is $$body words (hard limit 800)"; fail=1; \
+	  elif [ "$$body" -gt 400 ]; then \
+	    echo "  ! $$f is $$body words (soft limit 400)"; \
+	  fi; \
 	done; \
 	if [ $$fail -eq 0 ]; then echo "  ✓ length ok"; else exit 1; fi
 
