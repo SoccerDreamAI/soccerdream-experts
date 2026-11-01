@@ -11,7 +11,7 @@
 [![Not a betting product](https://img.shields.io/badge/research_framework-not_a_betting_product-red.svg)](NOTICE.md#8-无担保不构成建议)
 [![Docs: EN / 中文](https://img.shields.io/badge/docs-EN_%2F_%E4%B8%AD%E6%96%87-informational.svg)](README.md)
 
-[在线体验](https://soccerdreamai.com) · [架构说明](docs/zh-CN/architecture.md) · [自建团队](teams/) · [讨论区](https://github.com/SoccerDreamAI/soccerdream-experts/discussions)
+[在线体验](https://soccerdreamai.com) · [架构说明](docs/zh-CN/architecture.md) · [自建团队](teams/) · [讨论区](https://github.com/SoccerDreamAI/soccerdream-experts/discussions) · [为什么不能取平均（英文长文）](https://dev.to/soccerdreamai/why-a-multi-agent-system-must-not-average-3p5d)
 
 </div>
 
