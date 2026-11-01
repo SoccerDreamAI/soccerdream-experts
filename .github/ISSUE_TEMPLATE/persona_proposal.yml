@@ -1,0 +1,105 @@
+name: "Persona proposal / 新专家人设提案"
+description: "Propose a new expert persona. / 提议一个新的专家人设（最容易、最有价值的贡献方式）。"
+title: "persona: <short-slug>"
+labels: ["persona", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for proposing a persona. **Read `agents/_schema.md` first** — proposals that
+        skip the four-section contract will be closed with a link back to it.
+
+        感谢提议。**请先读 `agents/_schema.md`**——不满足四段契约的提案会被关闭并附回该文档。
+
+  - type: input
+    id: slug
+    attributes:
+      label: "Slug / 标识"
+      description: "lowercase-kebab, becomes the filename. / 小写连字符，将作为文件名。"
+      placeholder: "injury-context-reader"
+    validations:
+      required: true
+
+  - type: textarea
+    id: prior
+    attributes:
+      label: "Prior / 先验偏好"
+      description: |
+        What does this member believe **before** seeing any data? One paragraph.
+        A prior is not a personality — it is a bias that makes the member predictably
+        wrong in a specific direction, which is what makes its disagreement informative.
+
+        这位专家在**看到任何数据之前**相信什么？一段话。
+        先验不是性格——它是一种让这位专家在**特定方向**上可预测地犯错的偏好，
+        正是这个偏好让它的反对变得有信息量。
+      placeholder: |
+        I treat X as the default until the record argues otherwise, because ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: method
+    attributes:
+      label: "Method / 推理路径"
+      description: "Ordered steps, concrete enough to reproduce. / 有序步骤，具体到别人能复现。"
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: "Evidence standard / 证据标准"
+      description: |
+        What must a claim cite to survive the challenge stage? Cite a number, not a vibe.
+
+        一条主张要活过质询环节，必须引用什么？要数字，不要感觉。
+    validations:
+      required: true
+
+  - type: textarea
+    id: refusal
+    attributes:
+      label: "Refusal / 拒答规则"
+      description: |
+        What will this member **not** answer? This is what keeps the team from drifting
+        into advice. State it as a rule, not a preference.
+
+        这位专家**不回答**什么？这一栏决定了团队会不会滑向「给建议」。写成规则，不要写成倾向。
+      placeholder: |
+        I do not name a single outcome, and I do not attach confidence to claims with
+        fewer than two cited figures.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: overlaps
+    attributes:
+      label: "Overlap check / 重复性自查"
+      description: |
+        Which existing persona is this closest to, and why is it not a duplicate?
+
+        与现有人设中哪一个最接近？为什么这不是重复品？
+      options:
+        - "quantitative-analyst — but different because ..."
+        - "market-odds-reader — but different because ..."
+        - "contrarian-hunter — but different because ..."
+        - "red-team-reviewer — but different because ..."
+        - "No existing persona is close (explain below)"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: "Confirmations / 确认项"
+      options:
+        - label: "This persona does not produce a selection, tip, stake, or recommendation. / 此人设不产出选项、建议、下注金额或推荐。"
+          required: true
+        - label: "All cited examples are placeholders, not real fixtures or real odds. / 所有示例均为占位符，不是真实赛事或真实赔率。"
+          required: true
+        - label: "I have read CONTRIBUTING.md (or CONTRIBUTING.zh-CN.md). / 我已读过贡献指南。"
+          required: true

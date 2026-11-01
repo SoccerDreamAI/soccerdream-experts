@@ -1,0 +1,16 @@
+# Normalise line endings. Without this, shell scripts checked out on Windows
+# break on Linux runners with "bad interpreter: /bin/bash^M".
+* text=auto eol=lf
+
+*.sh      text eol=lf
+*.py      text eol=lf
+*.yml     text eol=lf
+*.yaml    text eol=lf
+*.md      text eol=lf
+Makefile  text eol=lf
+LICENSE   text eol=lf
+
+*.gif     binary
+*.png     binary
+*.jpg     binary
+*.ico     binary

@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you reference this framework in research or a write-up, please cite it as below."
+title: "SoccerDream Expert Team: a multi-agent framework with an enforced disagreement protocol"
+abstract: >
+  A source-available framework for multi-agent analysis in which members reason
+  independently, conflicting claims are escalated rather than averaged, and an
+  adversarial review stage may overturn the team's conclusion before publication.
+type: software
+license: BUSL-1.1
+repository-code: "https://github.com/SoccerDreamAI/soccerdream-experts"
+url: "https://soccerdreamai.com"
+keywords:
+  - multi-agent
+  - llm
+  - disagreement-protocol
+  - calibration
+  - red-teaming
+  - agent-orchestration
+  - reproducible-research
+authors:
+  - name: "SoccerDream AI"
+version: "0.1.0"
+date-released: "2026-11-01"

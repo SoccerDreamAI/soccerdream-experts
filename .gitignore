@@ -1,0 +1,53 @@
+# --- credentials: never commit these ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+service-account*.json
+.secrets
+secrets.yaml
+
+# --- build & caches ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+node_modules/
+.next/
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+coverage.xml
+.coverage
+htmlcov/
+
+# --- runtime artifacts ---
+runs/
+output/
+*.log
+!docs/**/*.log
+
+# --- editors & OS ---
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- local overrides ---
+*.local.yaml
+*.local.yml
+teams/*.private.yaml
+
+# --- local preview scratch ---
+.preview/
+.gif-build/

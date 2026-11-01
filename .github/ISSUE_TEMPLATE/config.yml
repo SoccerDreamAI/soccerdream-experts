@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "💬 Questions & team showcases / 提问与团队展示"
+    url: https://github.com/SoccerDreamAI/soccerdream-experts/discussions
+    about: "Ask anything, or show the team you built. / 任何问题都可以问，也可以晒你搭的团队。"
+  - name: "🔒 Report a security issue / 报告安全问题"
+    url: https://github.com/SoccerDreamAI/soccerdream-experts/security/advisories/new
+    about: "Private channel. Never open a public issue for security. / 私有通道，安全问题请勿开公开 Issue。"
+  - name: "📄 Licensing & commercial use / 许可与商用授权"
+    url: https://github.com/SoccerDreamAI/soccerdream-experts/blob/main/NOTICE.md
+    about: "Read before forking for commercial purposes. / 商用 fork 之前请先读这份。"

@@ -1,0 +1,49 @@
+# Example team — four members, enforced challenge stage.
+# Run it:  sd team run teams/example-team.yaml --event demo-001
+#
+# This file is a working reference, not a template to strip down. Every field below is
+# documented in teams/_schema.md. Delete nothing without reading why it is there.
+
+name: match-research-team
+version: 1
+description: >
+  Four-member research team. Two independent distribution reads, one dissent advocate,
+  one adversarial reviewer with authority to overturn the conclusion.
+
+stages:
+  - context
+  - specialists
+  - challenge
+  - review
+
+members:
+  - ref: agents/quantitative-analyst.md
+    role: specialist
+
+  - ref: agents/market-odds-reader.md
+    role: specialist
+
+  - ref: agents/contrarian-hunter.md
+    role: challenger
+
+  - ref: agents/red-team-reviewer.md
+    role: reviewer
+
+rules:
+  # Members never see each other's drafts. Removing this removes the point of the team.
+  independence: strict
+
+  # Conflicts escalate to the challenge stage. They are never averaged.
+  # See docs/architecture.md § "Why averaging is banned".
+  disagreement: escalate
+
+  # Confidence downgrades automatically when load-bearing citations are weak.
+  confidence: calibrated
+
+  # Two rounds is enough for one yield. A third rarely changes the outcome.
+  max_rounds: 2
+
+output:
+  format: report
+  language: auto
+  include_evidence: true

@@ -1,0 +1,62 @@
+name: lint
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    name: lint & test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Secret scan (trufflehog)
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --only-verified
+
+      - name: Lint schema, secrets, length
+        run: make lint
+
+      - name: Run tests
+        run: make test
+
+      - name: Check bilingual docs are in sync
+        run: |
+          # Each pair must link to the other, using the exact relative form that works
+          # on GitHub. Comparison is against those forms, not the full path — a full-path
+          # match silently passes for the file's own name and proves nothing.
+          set +e
+          fail=0
+          check() {
+            en="$1"; zh="$2"; want_in_en="$3"; want_in_zh="$4"
+            [ -f "$en" ] || { echo "::error::missing $en"; fail=1; return; }
+            [ -f "$zh" ] || { echo "::error::missing $zh"; fail=1; return; }
+            grep -qF "$want_in_en" "$en" \
+              || { echo "::error file=$en::missing link '$want_in_en'"; fail=1; }
+            grep -qF "$want_in_zh" "$zh" \
+              || { echo "::error file=$zh::missing link '$want_in_zh'"; fail=1; }
+          }
+
+          check README.md                     README.zh-CN.md                 README.zh-CN.md                 README.md
+          check CONTRIBUTING.md               CONTRIBUTING.zh-CN.md           CONTRIBUTING.zh-CN.md           CONTRIBUTING.md
+          check docs/architecture.md          docs/zh-CN/architecture.md      zh-CN/architecture.md           ../architecture.md
+
+          if [ $fail -eq 0 ]; then echo "✓ bilingual links intact"; fi
+          exit $fail

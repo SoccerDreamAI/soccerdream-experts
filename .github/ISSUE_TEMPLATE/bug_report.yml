@@ -1,0 +1,74 @@
+name: "Bug report / 缺陷报告"
+description: "Something in the client, loader, or schema validation is broken. / 客户端、加载器或 schema 校验出了问题。"
+title: "bug: <short description>"
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ⚠️ **Security issues do not belong here.** Report them via
+        [Security → Report a vulnerability](../../security/advisories/new).
+
+        ⚠️ **安全问题不要提在这里**，请走 Security → Report a vulnerability。
+
+  - type: input
+    id: version
+    attributes:
+      label: "Version / 版本"
+      description: "`sd --version` output. / `sd --version` 的输出。"
+      placeholder: "0.4.2"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: "Area / 影响范围"
+      options:
+        - "cli — command execution"
+        - "sdk — library API"
+        - "loader — team/persona parsing"
+        - "validation — schema checks"
+        - "docs — documentation is wrong"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected / 预期行为"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: "Actual / 实际行为"
+      description: "Include the full error output, not a paraphrase. / 贴完整报错，不要转述。"
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: "Minimal reproduction / 最小复现"
+      description: |
+        Paste the smallest team file + command that reproduces it. Redact any token.
+
+        贴出能复现问题的最小团队文件与命令。**务必隐去 token。**
+      render: shell
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: "Pre-submit checks / 提交前自查"
+      options:
+        - label: "I ran `make lint` and `make test` locally. / 我已在本地跑过 `make lint` 与 `make test`。"
+          required: true
+        - label: "I searched existing issues. / 我已搜索过已有 Issue。"
+          required: true
+        - label: "This report contains no credentials, tokens, or internal hostnames. / 本报告不含任何凭据、token 或内网主机名。"
+          required: true
