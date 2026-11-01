@@ -1,25 +1,13 @@
 version: 2
+
+# Only ecosystems that actually exist in this repository.
+#
+# There is deliberately no requirements.txt and no package.json here: the CLI
+# ships as documentation of the wire protocol, not as a distributable. Declaring
+# pip or npm ecosystems against a repo with no manifest produces a failed
+# Dependabot run on every schedule — a red X that means nothing and costs
+# credibility. Add the block back the moment a manifest lands.
 updates:
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
-      interval: "monthly"
-    open-pull-requests-limit: 5
-    commit-message:
-      prefix: "chore(deps)"
-    labels:
-      - "dependencies"
-
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "monthly"
-    open-pull-requests-limit: 5
-    commit-message:
-      prefix: "chore(deps)"
-    labels:
-      - "dependencies"
-
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
