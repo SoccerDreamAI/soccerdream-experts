@@ -11,7 +11,7 @@
 [![Not a betting product](https://img.shields.io/badge/research_framework-not_a_betting_product-red.svg)](NOTICE.md#8-no-warranty-no-advice)
 [![Docs: EN / 中文](https://img.shields.io/badge/docs-EN_%2F_%E4%B8%AD%E6%96%87-informational.svg)](README.zh-CN.md)
 
-[Live demo](https://soccerdreamai.com) · [Architecture](docs/architecture.md) · [Build a team](teams/) · [Discussions](https://github.com/SoccerDreamAI/soccerdream-experts/discussions) · [Why averaging fails](https://dev.to/soccerdreamai/why-a-multi-agent-system-must-not-average-3p5d)
+[Live demo](https://soccerdreamai.com) · [**Verify in 2 min**](docs/VERIFY.md) · [FAQ](docs/FAQ.md) · [Architecture](docs/architecture.md) · [Build a team](teams/) · [Discussions](https://github.com/SoccerDreamAI/soccerdream-experts/discussions) · [Why averaging fails](https://dev.to/soccerdreamai/why-a-multi-agent-system-must-not-average-3p5d)
 
 </div>
 
@@ -59,6 +59,9 @@ python3 cli/sd.py demo                       # the protocol, start to finish
 python3 cli/sd.py demo --unresolved          # the run that ends with no conclusion
 python3 cli/sd.py validate teams/example-team.yaml
 ```
+
+> Every output quoted in this README reproduces offline on a fresh clone — including the one
+> that fails. [Verify it in two minutes →](docs/VERIFY.md)
 
 `demo` is a **recorded** run: fixed inputs, no model calls. It shows who is allowed to say
 what, and what happens when two of them disagree:

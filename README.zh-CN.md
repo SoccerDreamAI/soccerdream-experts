@@ -11,7 +11,7 @@
 [![Not a betting product](https://img.shields.io/badge/research_framework-not_a_betting_product-red.svg)](NOTICE.md#8-无担保不构成建议)
 [![Docs: EN / 中文](https://img.shields.io/badge/docs-EN_%2F_%E4%B8%AD%E6%96%87-informational.svg)](README.md)
 
-[在线体验](https://soccerdreamai.com) · [架构说明](docs/zh-CN/architecture.md) · [自建团队](teams/) · [讨论区](https://github.com/SoccerDreamAI/soccerdream-experts/discussions) · [为什么不能取平均（英文长文）](https://dev.to/soccerdreamai/why-a-multi-agent-system-must-not-average-3p5d)
+[在线体验](https://soccerdreamai.com) · [**2 分钟自证**](docs/VERIFY.md) · [常见问题](docs/FAQ.md) · [架构说明](docs/zh-CN/architecture.md) · [自建团队](teams/) · [讨论区](https://github.com/SoccerDreamAI/soccerdream-experts/discussions) · [为什么不能取平均（英文长文）](https://dev.to/soccerdreamai/why-a-multi-agent-system-must-not-average-3p5d)
 
 </div>
 
@@ -60,6 +60,9 @@ python3 cli/sd.py demo                       # 完整走一遍协议
 python3 cli/sd.py demo --unresolved          # 那条「不给结论」的路径
 python3 cli/sd.py validate teams/example-team.yaml
 ```
+
+> 本 README 里引用的每一段输出，都能在全新克隆上离线复现——包括那段**故意失败**的。
+> [两分钟自证 →](docs/VERIFY.md)
 
 `demo` 是**录播**：输入固定，不调用任何模型。它演示的是协议本身——谁有权说什么，
 以及两个人意见相反时会发生什么：
